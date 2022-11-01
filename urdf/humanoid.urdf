@@ -1,0 +1,149 @@
+<robot name="humanoid">
+  <!-- ===== DUMMY 'BASE' LINK ==== -->
+  <link name="torso">
+    <inertial>
+      <mass value="6.5"/>
+      <origin xyz="0.0 0.0 0.15"/>
+      <inertia ixx="0.3006167" ixy="0" ixz="0" iyy="0.23837" iyz="0" izz="0.09690467"/>
+    </inertial>
+    <visual>
+      <geometry>
+         <mesh filename="meshes_zidong/Body.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+  <!--!!!!!!!!!!!!!!!!!!!!!RIGHT LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+  <joint name="torso_to_R_HipRz" type="revolute">
+    <axis xyz="0 0 1"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.075 0.0"/>
+    <parent link="torso"/>
+    <child link="R_HipRz"/>
+    <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+  </joint>
+  <link name="R_HipRz">
+    <inertial>
+      <mass value="0.30"/>
+      <origin xyz="0.0 0.00 -0.04293"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+      <geometry>
+         <mesh filename="meshes_zidong/HipRz.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0. 0. 0"/>
+    </visual>
+   </link>
+
+  <joint name="R_HipRz_to_R_HipRx" type="revolute">
+    <axis xyz="1 0 0"/>
+    <origin rpy="0 0 0" xyz="-0.041 0.0 -0.0885"/>
+    <parent link="R_HipRz"/>
+    <child link="R_HipRx"/>
+    <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+  </joint>
+  <link name="R_HipRx">
+    <inertial>
+      <mass value="0.30"/>
+      <origin xyz="0.0 0.0 -0.01"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+      <geometry>
+         <mesh filename="meshes_zidong/HipRx.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0. 0. 0"/>
+    </visual>
+   </link>
+
+  <joint name="R_HipRx_to_R_Thigh" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.065 0.0 0.0"/>
+    <parent link="R_HipRx"/>
+    <child link="R_Thigh"/>
+    <limit lower="-3" upper="3" effort="68" velocity="55" />
+  </joint>
+  <link name="R_Thigh">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0.0 -0.10"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+     <geometry>
+          <mesh filename="meshes_zidong/Thigh.obj" scale="1 1 1"/>
+     </geometry>
+      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+    </visual>
+   </link>
+
+  <joint name="R_Knee" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.017875 -0.247"/>
+    <parent link="R_Thigh"/>
+    <child link="R_Shank"/>
+    <limit lower="0" upper="3" effort="136" velocity="55" />
+  </joint>
+  <link name="R_Shank">
+    <inertial>
+      <mass value="0.70"/>
+      <origin xyz="-0.03416 -0.00075 -0.01"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+      <geometry>
+         <mesh filename="meshes_zidong/LowerLeg3_drawing.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0 0 0.0" xyz="0. 0. 0"/>
+    </visual>
+  </link>
+
+  <joint name="R_Ankle" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.247"/>
+    <parent link="R_Shank"/>
+    <child link="R_Foot"/>
+    <limit lower="-3" upper="3" effort="35" velocity="55" />
+  </joint>
+  <link name="R_Foot">
+    <inertial>
+      <mass value="0.30"/>
+      <origin xyz="0.0 0.0 -0.01"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="meshes_zidong/foot_drawing.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0. 0. 0."/>
+    </visual>
+
+      <visual>
+          <geometry>
+              <sphere radius="0.001"/>
+          </geometry>
+          <origin xyz="0.125 0.0 -0.033" rpy="0 0 0"/>
+      </visual>
+      <collision>
+          <geometry>
+              <sphere radius="0.0"/>
+          </geometry>
+          <origin xyz="0.125 0.0 -0.033" rpy="0 0 0"/>
+      </collision>
+
+        <visual>
+            <geometry>
+                <sphere radius="0.001"/>
+            </geometry>
+            <origin xyz="-0.025 0.0 -0.033" rpy="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <sphere radius="0.0"/>
+            </geometry>
+            <origin xyz="-0.025 0.0 -0.033" rpy="0 0 0"/>
+        </collision>
+  </link> 
+</robot>
+
+
